@@ -1,0 +1,99 @@
+{
+  "experiment": "E18_R2_real_byte_reclamation",
+  "runs": [
+    {
+      "seed": 2783972638,
+      "r2_calls": 24,
+      "application_pages_freed": 5620,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972639,
+      "r2_calls": 24,
+      "application_pages_freed": 5513,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972640,
+      "r2_calls": 24,
+      "application_pages_freed": 5362,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972641,
+      "r2_calls": 28,
+      "application_pages_freed": 5686,
+      "pool_bytes_released": 0,
+      "violations": 3584,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972642,
+      "r2_calls": 28,
+      "application_pages_freed": 5698,
+      "pool_bytes_released": 0,
+      "violations": 3584,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972643,
+      "r2_calls": 28,
+      "application_pages_freed": 5538,
+      "pool_bytes_released": 0,
+      "violations": 3584,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972644,
+      "r2_calls": 24,
+      "application_pages_freed": 5596,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972645,
+      "r2_calls": 24,
+      "application_pages_freed": 5422,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972646,
+      "r2_calls": 24,
+      "application_pages_freed": 5331,
+      "pool_bytes_released": 0,
+      "violations": 3072,
+      "invariant_breaches": 0
+    },
+    {
+      "seed": 2783972647,
+      "r2_calls": 28,
+      "application_pages_freed": 5754,
+      "pool_bytes_released": 0,
+      "violations": 3584,
+      "invariant_breaches": 0
+    }
+  ],
+  "summary": {
+    "runs": 10,
+    "pages_freed_min": 5331,
+    "pages_freed_median": 5567.0,
+    "pages_freed_max": 5754,
+    "bytes_released_min": 0,
+    "bytes_released_median": 0.0,
+    "bytes_released_max": 0,
+    "all_runs_released_pool_bytes": false
+  },
+  "callback_policy": "delete the 512 newest live opportunistic pages; R1 already targets the coldest",
+  "scope": "cooperative application callback in the software model",
+  "failures": [],
+  "wall_s": 66.80937470900001
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "ledger-artifact-manifest-v1",
+  "description": "Complete retained evidence required for strict artifact validation. Smoke and superseded results are intentionally excluded.",
+  "required_results": [
+    {"id": "E0", "file": "e0_calibration.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E1", "file": "e1_accuracy.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E2", "file": "e2_frontier.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E3", "file": "e3_phase_stress.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E4", "file": "e4_overheads.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E4 variance", "file": "e4_variance.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E5", "file": "e5_multitenant.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E6", "file": "e6_regime.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E7", "file": "e7_realstate.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E8", "file": "e8_detector.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E9", "file": "e9_strategic.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E10", "file": "e10_scale.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E11", "file": "e11_sensitivity.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+
+    {"id": "E12 concurrent repeat 1", "file": "e12_feedback_r1.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 concurrent repeat 2", "file": "e12_feedback_r2.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 concurrent repeat 3", "file": "e12_feedback_r3.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 serial repeat 1", "file": "e12_feedback_serial_r1.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 serial repeat 2", "file": "e12_feedback_serial_r2.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 serial repeat 3", "file": "e12_feedback_serial_r3.json", "required_keys": ["meta", "loss", "attribution", "placeability", "throughput"]},
+    {"id": "E12 summary", "file": "e12_feedback_summary.json", "required_keys": ["runs", "million_records_per_s", "forced_loss_debt_bytes", "placeability_counterexample_rejected"]},
+
+    {"id": "E13 repeat 1", "file": "e13_async_r1.json", "required_keys": ["cells", "pass"]},
+    {"id": "E13 repeat 2", "file": "e13_async_r2.json", "required_keys": ["cells", "pass"]},
+    {"id": "E13 repeat 3", "file": "e13_async_r3.json", "required_keys": ["cells", "pass"]},
+    {"id": "E13 summary", "file": "e13_async_summary.json", "required_keys": ["runs", "cells", "pass"]},
+
+    {"id": "E14", "file": "e14_dependence.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E15", "file": "e15_drift_adversary.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E16", "file": "e16_interface_model.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E17", "file": "e17_reactive_baseline.json", "result_schema": "ccap-results-v1", "required_keys": ["data", "failures"]},
+    {"id": "E18", "file": "e18_r2_callback.json", "required_keys": ["runs", "summary", "failures"]},
+    {"id": "E19", "file": "e19_review_analysis.json", "required_keys": ["application_cost_mapping", "detector_exact_intervals", "application_cost_scope"]},
+    {"id": "E20", "file": "e20_multigib_realstate.json", "required_keys": ["pages_loaded", "pages_rewritten", "capture_cipher", "invariant", "scope"]},
+    {"id": "E21", "file": "e21_linux_memcg.json", "required_keys": ["environment", "config", "summary", "trials", "failures"]},
+    {"id": "E22", "file": "e22_redis_memcg.json", "required_keys": ["redis_version", "configuration", "summary", "trials", "scope"]},
+    {"id": "E23", "file": "e23_end_to_end_redis.json", "result_schema": "ccap-results-v1", "required_keys": ["summary", "trials", "metric_classes", "scope", "failures"]},
+    {"id": "E24", "file": "e24_calibration_guard.json", "result_schema": "ccap-results-v1", "required_keys": ["summary", "strata", "metric_classes", "guarantee", "failures"]},
+    {"id": "E25", "file": "e25_tracker_scale.json", "result_schema": "ccap-results-v1", "required_keys": ["data.summary", "data.runs", "failures"]}
+  ]
+}

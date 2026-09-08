@@ -1,0 +1,11 @@
+{
+  "experiment": "E13_async_feedback",
+  "record_bytes": 16, "records_per_cell": 100000, "producer_gap_ns": 5000,
+  "cells": [
+    {"name":"busy_batch1","poll_ns":0,"batch":1,"consumed":100000,"dropped":0,"gap_records":0,"stale_records":0,"latency_ns_p50":0,"latency_ns_p99":15000,"latency_ns_max":344000,"max_depth":118,"pessimistic_headroom_bytes":483328,"pass":true}    ,
+{"name":"poll10us_batch8","poll_ns":10000,"batch":8,"consumed":100000,"dropped":0,"gap_records":0,"stale_records":0,"latency_ns_p50":5000,"latency_ns_p99":11000,"latency_ns_max":59000,"max_depth":16,"pessimistic_headroom_bytes":65536,"pass":true}    ,
+{"name":"poll100us_batch64","poll_ns":100000,"batch":64,"consumed":100000,"dropped":0,"gap_records":0,"stale_records":0,"latency_ns_p50":50000,"latency_ns_p99":98000,"latency_ns_max":136000,"max_depth":32,"pessimistic_headroom_bytes":131072,"pass":true}    ,
+{"name":"poll1ms_batch256","poll_ns":1000000,"batch":256,"consumed":100000,"dropped":0,"gap_records":0,"stale_records":0,"latency_ns_p50":495000,"latency_ns_p99":982000,"latency_ns_max":1019000,"max_depth":204,"pessimistic_headroom_bytes":835584,"pass":true}
+  ],
+  "pass": true
+}

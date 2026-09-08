@@ -1,0 +1,7 @@
+{
+  "meta": {"experiment": "E12_feedback_placeability", "record_bytes": 16},
+  "loss": {"dropped": 8, "gap_apply_code": 2, "gap_records": 8, "debt_before_resync": 32768, "debt_after_resync": 0},
+  "attribution": {"tenant_bytes": [30720, 32768, 34816, 36864]},
+  "placeability": {"pool_bytes": 67108864, "aggregate_free_bytes": 35567616, "aggregate_free_fraction": 0.529999, "raw_page_reservation_code": -1, "matching_class_reservation_code": 0},
+  "throughput": {"records": 1000000, "seconds": 0.017876666, "million_records_per_s": 55.939, "mib_per_s": 853.559, "dropped": 0, "token_xor": 1000000}
+}

@@ -1,0 +1,324 @@
+{
+  "schema": "ccap-results-v1",
+  "experiment": "E16",
+  "title": "Completion bandwidth, queue, metadata, and ordering model",
+  "date_utc": "Mon Aug 31 18:27:02 UTC 2026",
+  "wall_seconds": 0.0,
+  "host": {
+    "uname": "Darwin <redacted-host> 25.5.0 Darwin Kernel Version 25.5.0: Tue Jun  9 22:26:15 PDT 2026; root:xnu-12377.121.10~1/RELEASE_ARM64_T6031 arm64",
+    "ncpu": 32,
+    "memsize": 549755813888,
+    "os": "macOS 26.5.2"
+  },
+  "toolchain": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "python": "3.14.5",
+    "numpy": "2.5.2",
+    "zlib": "1.2.12"
+  },
+  "config": {
+    "record_bytes": 16,
+    "measured_host_records_s": 54240000.0,
+    "write_bandwidths_GB_s": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "poll_intervals_us": [
+      10,
+      100,
+      1000
+    ]
+  },
+  "seeds": [],
+  "data": {
+    "bandwidth": [
+      {
+        "device_write_GB_s": 64,
+        "size_change_fraction": 1.0,
+        "page_writes_s": 15625000.0,
+        "completion_records_s": 15625000.0,
+        "completion_GB_s": 0.25,
+        "completion_fraction_of_write_bandwidth": 0.00390625,
+        "measured_host_core_equivalents": 0.2880715339233038
+      },
+      {
+        "device_write_GB_s": 64,
+        "size_change_fraction": 0.25,
+        "page_writes_s": 15625000.0,
+        "completion_records_s": 3906250.0,
+        "completion_GB_s": 0.0625,
+        "completion_fraction_of_write_bandwidth": 0.0009765625,
+        "measured_host_core_equivalents": 0.07201788348082595
+      },
+      {
+        "device_write_GB_s": 64,
+        "size_change_fraction": 0.05,
+        "page_writes_s": 15625000.0,
+        "completion_records_s": 781250.0,
+        "completion_GB_s": 0.0125,
+        "completion_fraction_of_write_bandwidth": 0.0001953125,
+        "measured_host_core_equivalents": 0.014403576696165191
+      },
+      {
+        "device_write_GB_s": 128,
+        "size_change_fraction": 1.0,
+        "page_writes_s": 31250000.0,
+        "completion_records_s": 31250000.0,
+        "completion_GB_s": 0.5,
+        "completion_fraction_of_write_bandwidth": 0.00390625,
+        "measured_host_core_equivalents": 0.5761430678466076
+      },
+      {
+        "device_write_GB_s": 128,
+        "size_change_fraction": 0.25,
+        "page_writes_s": 31250000.0,
+        "completion_records_s": 7812500.0,
+        "completion_GB_s": 0.125,
+        "completion_fraction_of_write_bandwidth": 0.0009765625,
+        "measured_host_core_equivalents": 0.1440357669616519
+      },
+      {
+        "device_write_GB_s": 128,
+        "size_change_fraction": 0.05,
+        "page_writes_s": 31250000.0,
+        "completion_records_s": 1562500.0,
+        "completion_GB_s": 0.025,
+        "completion_fraction_of_write_bandwidth": 0.0001953125,
+        "measured_host_core_equivalents": 0.028807153392330382
+      },
+      {
+        "device_write_GB_s": 256,
+        "size_change_fraction": 1.0,
+        "page_writes_s": 62500000.0,
+        "completion_records_s": 62500000.0,
+        "completion_GB_s": 1.0,
+        "completion_fraction_of_write_bandwidth": 0.00390625,
+        "measured_host_core_equivalents": 1.1522861356932153
+      },
+      {
+        "device_write_GB_s": 256,
+        "size_change_fraction": 0.25,
+        "page_writes_s": 62500000.0,
+        "completion_records_s": 15625000.0,
+        "completion_GB_s": 0.25,
+        "completion_fraction_of_write_bandwidth": 0.0009765625,
+        "measured_host_core_equivalents": 0.2880715339233038
+      },
+      {
+        "device_write_GB_s": 256,
+        "size_change_fraction": 0.05,
+        "page_writes_s": 62500000.0,
+        "completion_records_s": 3125000.0,
+        "completion_GB_s": 0.05,
+        "completion_fraction_of_write_bandwidth": 0.0001953125,
+        "measured_host_core_equivalents": 0.057614306784660764
+      },
+      {
+        "device_write_GB_s": 512,
+        "size_change_fraction": 1.0,
+        "page_writes_s": 125000000.0,
+        "completion_records_s": 125000000.0,
+        "completion_GB_s": 2.0,
+        "completion_fraction_of_write_bandwidth": 0.00390625,
+        "measured_host_core_equivalents": 2.3045722713864305
+      },
+      {
+        "device_write_GB_s": 512,
+        "size_change_fraction": 0.25,
+        "page_writes_s": 125000000.0,
+        "completion_records_s": 31250000.0,
+        "completion_GB_s": 0.5,
+        "completion_fraction_of_write_bandwidth": 0.0009765625,
+        "measured_host_core_equivalents": 0.5761430678466076
+      },
+      {
+        "device_write_GB_s": 512,
+        "size_change_fraction": 0.05,
+        "page_writes_s": 125000000.0,
+        "completion_records_s": 6250000.0,
+        "completion_GB_s": 0.1,
+        "completion_fraction_of_write_bandwidth": 0.0001953125,
+        "measured_host_core_equivalents": 0.11522861356932153
+      }
+    ],
+    "queues": [
+      {
+        "records_s": 200000.0,
+        "poll_us": 10,
+        "nominal_depth": 2,
+        "two_x_burst_depth": 4,
+        "two_x_burst_queue_MiB": 6.103515625e-05,
+        "pessimistic_headroom_MiB": 0.015625
+      },
+      {
+        "records_s": 200000.0,
+        "poll_us": 100,
+        "nominal_depth": 20,
+        "two_x_burst_depth": 40,
+        "two_x_burst_queue_MiB": 0.0006103515625,
+        "pessimistic_headroom_MiB": 0.15625
+      },
+      {
+        "records_s": 200000.0,
+        "poll_us": 1000,
+        "nominal_depth": 200,
+        "two_x_burst_depth": 400,
+        "two_x_burst_queue_MiB": 0.006103515625,
+        "pessimistic_headroom_MiB": 1.5625
+      },
+      {
+        "records_s": 5000000.0,
+        "poll_us": 10,
+        "nominal_depth": 50,
+        "two_x_burst_depth": 100,
+        "two_x_burst_queue_MiB": 0.00152587890625,
+        "pessimistic_headroom_MiB": 0.390625
+      },
+      {
+        "records_s": 5000000.0,
+        "poll_us": 100,
+        "nominal_depth": 500,
+        "two_x_burst_depth": 1000,
+        "two_x_burst_queue_MiB": 0.0152587890625,
+        "pessimistic_headroom_MiB": 3.90625
+      },
+      {
+        "records_s": 5000000.0,
+        "poll_us": 1000,
+        "nominal_depth": 5000,
+        "two_x_burst_depth": 10000,
+        "two_x_burst_queue_MiB": 0.152587890625,
+        "pessimistic_headroom_MiB": 39.0625
+      },
+      {
+        "records_s": 25000000.0,
+        "poll_us": 10,
+        "nominal_depth": 250,
+        "two_x_burst_depth": 500,
+        "two_x_burst_queue_MiB": 0.00762939453125,
+        "pessimistic_headroom_MiB": 1.953125
+      },
+      {
+        "records_s": 25000000.0,
+        "poll_us": 100,
+        "nominal_depth": 2500,
+        "two_x_burst_depth": 5000,
+        "two_x_burst_queue_MiB": 0.0762939453125,
+        "pessimistic_headroom_MiB": 19.53125
+      },
+      {
+        "records_s": 25000000.0,
+        "poll_us": 1000,
+        "nominal_depth": 25000,
+        "two_x_burst_depth": 50000,
+        "two_x_burst_queue_MiB": 0.762939453125,
+        "pessimistic_headroom_MiB": 195.3125
+      },
+      {
+        "records_s": 125000000.0,
+        "poll_us": 10,
+        "nominal_depth": 1250,
+        "two_x_burst_depth": 2500,
+        "two_x_burst_queue_MiB": 0.03814697265625,
+        "pessimistic_headroom_MiB": 9.765625
+      },
+      {
+        "records_s": 125000000.0,
+        "poll_us": 100,
+        "nominal_depth": 12500,
+        "two_x_burst_depth": 25000,
+        "two_x_burst_queue_MiB": 0.3814697265625,
+        "pessimistic_headroom_MiB": 97.65625
+      },
+      {
+        "records_s": 125000000.0,
+        "poll_us": 1000,
+        "nominal_depth": 125000,
+        "two_x_burst_depth": 250000,
+        "two_x_burst_queue_MiB": 3.814697265625,
+        "pessimistic_headroom_MiB": 976.5625
+      }
+    ],
+    "alternatives": [
+      {
+        "scheme": "per-page completion",
+        "relative_records": 1.0,
+        "keeps_exact_owner": true,
+        "keeps_generation_order": true,
+        "loss": "none; highest traffic"
+      },
+      {
+        "scheme": "exception-only class change",
+        "relative_records": "p(class changes)",
+        "keeps_exact_owner": true,
+        "keeps_generation_order": true,
+        "loss": "host must initialize and rescan unchanged pages"
+      },
+      {
+        "scheme": "64-page region aggregate",
+        "relative_records": 0.015625,
+        "keeps_exact_owner": false,
+        "keeps_generation_order": false,
+        "loss": "cannot charge a page owner or reject stale page generations"
+      },
+      {
+        "scheme": "1/64 sampling",
+        "relative_records": 0.015625,
+        "keeps_exact_owner": false,
+        "keeps_generation_order": false,
+        "loss": "estimation only; cannot maintain exact owned bytes"
+      }
+    ],
+    "ordering": {
+      "valid_orders": 3,
+      "safe_generation_protocol_wrong_owner": 0,
+      "broken_token_only_wrong_owner": 1,
+      "broken_examples": [
+        {
+          "order": [
+            "free_g1",
+            "reuse_g2",
+            "completion_g1"
+          ],
+          "wrong_charge": 4096
+        }
+      ],
+      "required_relation": "free/migration waits through the last issued sequence; reuse increments generation; stale records create pessimistic debt until snapshot resynchronization"
+    },
+    "metadata": [
+      {
+        "active_fraction": 1.0,
+        "pte_metadata_GiB_per_TiB_logical": 4.0,
+        "note": "16-byte host/device page record; excludes extents, queues, windows"
+      },
+      {
+        "active_fraction": 0.25,
+        "pte_metadata_GiB_per_TiB_logical": 1.0,
+        "note": "16-byte host/device page record; excludes extents, queues, windows"
+      },
+      {
+        "active_fraction": 0.1,
+        "pte_metadata_GiB_per_TiB_logical": 0.4,
+        "note": "16-byte host/device page record; excludes extents, queues, windows"
+      },
+      {
+        "active_fraction": 0.01,
+        "pte_metadata_GiB_per_TiB_logical": 0.04,
+        "note": "16-byte host/device page record; excludes extents, queues, windows"
+      }
+    ],
+    "measured_anchor": {
+      "software_records_s": 54240000.0,
+      "record_bytes": 16
+    },
+    "scope": "analytical queue/link accounting plus ordering litmus; not an FPGA, CXL transport, interrupt, DMA, coherence, or controller-SRAM measurement"
+  },
+  "modeled_fields": [
+    "data.bandwidth",
+    "data.queues",
+    "data.metadata"
+  ],
+  "failures": []
+}

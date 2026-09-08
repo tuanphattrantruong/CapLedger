@@ -1,0 +1,20 @@
+{
+  "experiment": "E12_feedback_placeability_repeat_summary",
+  "runs": 3,
+  "records_per_run": 1000000,
+  "record_bytes": 16,
+  "million_records_per_s": {
+    "median": 54.237,
+    "min": 44.303,
+    "max": 55.939
+  },
+  "mib_per_s": {
+    "median": 827.588,
+    "min": 676.013,
+    "max": 853.559
+  },
+  "dropped": 0,
+  "forced_loss_records": 8,
+  "forced_loss_debt_bytes": 32768,
+  "placeability_counterexample_rejected": true
+}

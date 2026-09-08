@@ -1,0 +1,16 @@
+# Build products
+build/
+*.o
+*.dylib
+*.so
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Experiment scratch
+experiments/tmp/
+
+# macOS
+.DS_Store

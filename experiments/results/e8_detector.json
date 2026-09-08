@@ -1,0 +1,7176 @@
+{
+  "schema": "ccap-results-v1",
+  "experiment": "e8_detector",
+  "title": "Detector operating characteristic: lag, lead, misses, false alarms",
+  "date_utc": "Sat Aug 29 08:50:45 UTC 2026",
+  "wall_seconds": 33.586,
+  "host": {
+    "uname": "Darwin <redacted-host> 25.5.0 Darwin Kernel Version 25.5.0: Tue Jun  9 22:26:15 PDT 2026; root:xnu-12377.121.10~1/RELEASE_ARM64_T6031 arm64",
+    "ncpu": 32,
+    "memsize": 549755813888,
+    "os": "macOS 26.5.2"
+  },
+  "toolchain": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "python": "3.14.5",
+    "numpy": "2.5.2",
+    "zlib": "1.2.12"
+  },
+  "config": {
+    "pool_bytes": 100663296,
+    "max_pages": 131072,
+    "extent_bytes": 1048576,
+    "working_set_pages": 24576,
+    "pre_ops": 8000,
+    "post_ops": 60000,
+    "drift_rates": [
+      1.0,
+      0.5,
+      0.2,
+      0.05,
+      0.01,
+      0.002,
+      0.0
+    ],
+    "thresholds": [
+      1.1,
+      1.2,
+      1.4,
+      1.7,
+      2.0
+    ],
+    "n_seeds": 12,
+    "zlib_level": 1,
+    "estimator": "analytic_ring",
+    "q": 0.99,
+    "drift_rate_def": "probability that a given write is newly-incompressible (one op == one write), i.e. the drift's share of the write stream; 1.0 reproduces E3's whole-working-set rewrite, 0.0 is the stationary control",
+    "ratio_detector": "fast/slow EWMA ratio > threshold, sampled every op; TRANSIENT (clears once the slow EWMA absorbs the shift)",
+    "cusum_detector": "S+ = max(0, S+ + (x - mu_slow - 0.5*sigma_slow)), alarm at S+ > h*sigma_slow, sigma floored at 32 B; LATCHES. The device runs h=5; the recorded size stream is replayed offline over CUSUM_H so the detector gets an operating characteristic rather than a single point.",
+    "cusum_h_grid": [
+      5.0,
+      10.0,
+      20.0,
+      50.0,
+      100.0,
+      200.0
+    ],
+    "cusum_k": 0.5,
+    "false_alarm_def": "an alarm raised during the stationary pre-drift phase, which begins after the working set is laid down and the detector is armed; alarms during the layup are warm-up transients, not false alarms on stationary content, and are excluded. Policy re-arms after acting, so a run can have several",
+    "false_positive_window": "the stationary pre-drift phase of every run plus the drift_rate=0 control arm",
+    "fast": false
+  },
+  "seeds": [
+    2783972638,
+    2783972639,
+    2783972640,
+    2783972641,
+    2783972642,
+    2783972643,
+    2783972644,
+    2783972645,
+    2783972646,
+    2783972647,
+    2783972648,
+    2783972649
+  ],
+  "data": {
+    "runs": [
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16896,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 322,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 5,
+            "fired_ops_post": 198,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 16,
+            "fired_ops_post": 78,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 87,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 319,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5144780193837815,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16896,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 320,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 7,
+            "fired_ops_post": 195,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 18,
+            "fired_ops_post": 75,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 26,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 87,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 320,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5058860355115624,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16640,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 322,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 198,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 17,
+            "fired_ops_post": 78,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 26,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 88,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 323,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5135974769826686,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 17408,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 319,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 195,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 17,
+            "fired_ops_post": 75,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 86,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 319,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5055313094993121,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16896,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 1,
+            "fired_ops_post": 325,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 4,
+            "fired_ops_post": 201,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 14,
+            "fired_ops_post": 82,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 26,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 89,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 325,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5264096295065104,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16640,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 321,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 196,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 17,
+            "fired_ops_post": 75,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 24,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 84,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 313,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5076789111690463,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 17408,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 321,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 7,
+            "fired_ops_post": 196,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 18,
+            "fired_ops_post": 76,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 86,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 317,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5089039555833412,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 17408,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 320,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 195,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 17,
+            "fired_ops_post": 74,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 87,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 319,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.50502554358349,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16896,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 322,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 5,
+            "fired_ops_post": 198,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 16,
+            "fired_ops_post": 77,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 87,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 319,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5140738224638497,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 17152,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 319,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 5,
+            "fired_ops_post": 196,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 16,
+            "fired_ops_post": 75,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 86,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 318,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5061078082652435,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 16640,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 319,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 196,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 17,
+            "fired_ops_post": 75,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 85,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 316,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5060455676544013,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 1.0,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 17408,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 319,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 195,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": 18,
+            "fired_ops_post": 74,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 26,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": 87,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": 320,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.5035780569336494,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 34160,
+        "cusum_lag": 5,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 9,
+            "fired_ops_post": 324,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 15,
+            "fired_ops_post": 99,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 10,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 16,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2878474034394398,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 34689,
+        "cusum_lag": 6,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 15,
+            "fired_ops_post": 345,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 25,
+            "fired_ops_post": 83,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 15,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 28,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3653081331002415,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 33512,
+        "cusum_lag": 3,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 7,
+            "fired_ops_post": 335,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 13,
+            "fired_ops_post": 114,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 14,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 77,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3542211972571727,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 34414,
+        "cusum_lag": 2,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 8,
+            "fired_ops_post": 384,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 15,
+            "fired_ops_post": 118,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 12,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 25,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 71,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.355231204776179,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 33505,
+        "cusum_lag": 3,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 348,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 6,
+            "fired_ops_post": 146,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 11,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 117,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.336842123433454,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 33577,
+        "cusum_lag": 3,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 4,
+            "fired_ops_post": 338,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 21,
+            "fired_ops_post": 112,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 21,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 126,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3181836100916975,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 35018,
+        "cusum_lag": 2,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 4,
+            "fired_ops_post": 271,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 12,
+            "fired_ops_post": 113,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 4,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 12,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 60,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3321007113540804,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 33138,
+        "cusum_lag": 2,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 315,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 7,
+            "fired_ops_post": 84,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 4,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 8,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 58,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3548859613075686,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 33211,
+        "cusum_lag": 4,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 4,
+            "fired_ops_post": 337,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 9,
+            "fired_ops_post": 98,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 4,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 24,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.309431070960136,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 34028,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 2,
+            "fired_ops_post": 272,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 13,
+            "fired_ops_post": 92,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 15,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 69,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3818259990450934,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 35065,
+        "cusum_lag": 4,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 6,
+            "fired_ops_post": 331,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 23,
+            "fired_ops_post": 100,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 4,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 23,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": 81,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.3341080219262542,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.5,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": 34154,
+        "cusum_lag": 8,
+        "cusum_false_positive": false,
+        "frac_flipped": 1.0,
+        "thresholds": {
+          "1.1": {
+            "lag": 10,
+            "fired_ops_post": 339,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 25,
+            "fired_ops_post": 84,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 8,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 11,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 26,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.316748691595373,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4871012369791667,
+        "thresholds": {
+          "1.1": {
+            "lag": 10,
+            "fired_ops_post": 884,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 14,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.181187308535095,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 30,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4948323567708333,
+        "thresholds": {
+          "1.1": {
+            "lag": 34,
+            "fired_ops_post": 845,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 30,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 13671,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1813942759038756,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 8,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4844563802083333,
+        "thresholds": {
+          "1.1": {
+            "lag": 53,
+            "fired_ops_post": 909,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 78,
+            "fired_ops_post": 24,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 8,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 78,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 100,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2489360823833529,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 34,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4852294921875,
+        "thresholds": {
+          "1.1": {
+            "lag": 34,
+            "fired_ops_post": 990,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 70,
+            "fired_ops_post": 12,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 34,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 37,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 73,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2406342386731137,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 24,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4855550130208333,
+        "thresholds": {
+          "1.1": {
+            "lag": 24,
+            "fired_ops_post": 755,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 24,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 72,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1912222223686917,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 6,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4956868489583333,
+        "thresholds": {
+          "1.1": {
+            "lag": 15,
+            "fired_ops_post": 879,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 47,
+            "fired_ops_post": 7,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 6,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 15,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 48,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2251267190331319,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 3,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4882405598958333,
+        "thresholds": {
+          "1.1": {
+            "lag": 16,
+            "fired_ops_post": 655,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 3,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 33,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1979080879962662,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 2,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4810791015625,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 880,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 58,
+            "fired_ops_post": 6,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 4,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 58,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2289172685264675,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4862467447916667,
+        "thresholds": {
+          "1.1": {
+            "lag": 5,
+            "fired_ops_post": 779,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 9111,
+            "fired_ops_post": 3,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 42,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.210936383040487,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 1,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4808349609375,
+        "thresholds": {
+          "1.1": {
+            "lag": 13,
+            "fired_ops_post": 742,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 45,
+            "fired_ops_post": 17,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 16,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": 53,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2599795314990814,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 7,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4849446614583333,
+        "thresholds": {
+          "1.1": {
+            "lag": 41,
+            "fired_ops_post": 910,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 7,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 49,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.196773605311254,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.2,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 11,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.4925944010416667,
+        "thresholds": {
+          "1.1": {
+            "lag": 15,
+            "fired_ops_post": 734,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 73,
+            "fired_ops_post": 1,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 11,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 15,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.20120500492611,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 10,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.11726888020833333,
+        "thresholds": {
+          "1.1": {
+            "lag": 121,
+            "fired_ops_post": 464,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 10,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.176688646490487,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 34,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.12300618489583333,
+        "thresholds": {
+          "1.1": {
+            "lag": 367,
+            "fired_ops_post": 545,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 34,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 14385,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1783566375846364,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 139,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.1246337890625,
+        "thresholds": {
+          "1.1": {
+            "lag": 139,
+            "fired_ops_post": 466,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 139,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 2620,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1687409807014166,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 182,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.12508138020833334,
+        "thresholds": {
+          "1.1": {
+            "lag": 1978,
+            "fired_ops_post": 495,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 182,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1675866042736307,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 103,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.12113444010416667,
+        "thresholds": {
+          "1.1": {
+            "lag": 116,
+            "fired_ops_post": 432,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 103,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 429,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1677720079367233,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 218,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.125,
+        "thresholds": {
+          "1.1": {
+            "lag": 218,
+            "fired_ops_post": 643,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 218,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 8346,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1636570463493725,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 720,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.12255859375,
+        "thresholds": {
+          "1.1": {
+            "lag": 1249,
+            "fired_ops_post": 521,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 720,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 4409,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1783302152763249,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 2,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.1207275390625,
+        "thresholds": {
+          "1.1": {
+            "lag": 3,
+            "fired_ops_post": 456,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 5,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1812539785919947,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 59,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.11869303385416667,
+        "thresholds": {
+          "1.1": {
+            "lag": 371,
+            "fired_ops_post": 658,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 59,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 13677,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1884245262428443,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 14,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.11710611979166667,
+        "thresholds": {
+          "1.1": {
+            "lag": 43,
+            "fired_ops_post": 620,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": 58598,
+            "fired_ops_post": 1,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 14,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 43089,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.2058421610245527,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 62,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.11958821614583333,
+        "thresholds": {
+          "1.1": {
+            "lag": 68,
+            "fired_ops_post": 505,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 62,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 30864,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.172199566190959,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.05,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 11,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.12300618489583333,
+        "thresholds": {
+          "1.1": {
+            "lag": 567,
+            "fired_ops_post": 520,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 11,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1774593872944998,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 1893,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.02294921875,
+        "thresholds": {
+          "1.1": {
+            "lag": 10889,
+            "fired_ops_post": 40,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1893,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1261845595577262,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 145,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0230712890625,
+        "thresholds": {
+          "1.1": {
+            "lag": 145,
+            "fired_ops_post": 64,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 145,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 31298,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.165432428601836,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 122,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.025309244791666668,
+        "thresholds": {
+          "1.1": {
+            "lag": 5893,
+            "fired_ops_post": 48,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 122,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1359368246621875,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5012,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.025797526041666668,
+        "thresholds": {
+          "1.1": {
+            "lag": 18561,
+            "fired_ops_post": 36,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5012,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1352521463708132,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 2080,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.024332682291666668,
+        "thresholds": {
+          "1.1": {
+            "lag": 14239,
+            "fired_ops_post": 49,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2080,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1458081624273158,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 227,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.023966471354166668,
+        "thresholds": {
+          "1.1": {
+            "lag": 12374,
+            "fired_ops_post": 40,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 227,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1307392866389923,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 2232,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.024983723958333332,
+        "thresholds": {
+          "1.1": {
+            "lag": 26896,
+            "fired_ops_post": 17,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 2232,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1251952548923263,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5319,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.02490234375,
+        "thresholds": {
+          "1.1": {
+            "lag": 10787,
+            "fired_ops_post": 74,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5319,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 44846,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1509500942620712,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5723,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.023030598958333332,
+        "thresholds": {
+          "1.1": {
+            "lag": 13668,
+            "fired_ops_post": 40,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5723,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 47210,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1818448602028522,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 3458,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.022420247395833332,
+        "thresholds": {
+          "1.1": {
+            "lag": 13977,
+            "fired_ops_post": 105,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 3458,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": 7935,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1353405558974152,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 5067,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.023640950520833332,
+        "thresholds": {
+          "1.1": {
+            "lag": 19999,
+            "fired_ops_post": 57,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 5067,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1310532489983371,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.01,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 1195,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.025105794270833332,
+        "thresholds": {
+          "1.1": {
+            "lag": 8355,
+            "fired_ops_post": 36,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1195,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1222403264671428,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 18789,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.004231770833333333,
+        "thresholds": {
+          "1.1": {
+            "lag": 49014,
+            "fired_ops_post": 4,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 18789,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1129404531849874,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 26494,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0038655598958333335,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 26494,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0839657970569971,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 10135,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.005289713541666667,
+        "thresholds": {
+          "1.1": {
+            "lag": 10135,
+            "fired_ops_post": 9,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 10135,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1189315648587466,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 26998,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0047607421875,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 26998,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0953320667913633,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 41165,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.00439453125,
+        "thresholds": {
+          "1.1": {
+            "lag": 59960,
+            "fired_ops_post": 2,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 41165,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1038924221841908,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 12888,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0052490234375,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 12888,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0952161797733075,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 18610,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.004679361979166667,
+        "thresholds": {
+          "1.1": {
+            "lag": 45181,
+            "fired_ops_post": 1,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 18610,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1086430659609336,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 12138,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.004353841145833333,
+        "thresholds": {
+          "1.1": {
+            "lag": 52702,
+            "fired_ops_post": 6,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 12138,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1173540594099527,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 16421,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.004638671875,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 16421,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0938038009796953,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 15056,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.005045572916666667,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 15056,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0975844860493678,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 14045,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0047607421875,
+        "thresholds": {
+          "1.1": {
+            "lag": 34579,
+            "fired_ops_post": 1,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 14045,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.1008029842582159,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.002,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": 1197,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.004720052083333333,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": 1197,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0981097465950007,
+        "ratio_max_pre": 1.063610378942261
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972638,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0660556003768047,
+        "ratio_max_pre": 1.0647813426238208
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972639,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.062643074468529,
+        "ratio_max_pre": 1.0635663382620353
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972640,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0628590657730608,
+        "ratio_max_pre": 1.058653541827857
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972641,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0712696460738012,
+        "ratio_max_pre": 1.0617844227177877
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972642,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0758381123457001,
+        "ratio_max_pre": 1.0599358467843758
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972643,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0733217595113624,
+        "ratio_max_pre": 1.067129396428216
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972644,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.068884673632034,
+        "ratio_max_pre": 1.0569276640572915
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972645,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0762409123907868,
+        "ratio_max_pre": 1.074591371631528
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972646,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0704932855130858,
+        "ratio_max_pre": 1.0574567994806356
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972647,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0666657606431758,
+        "ratio_max_pre": 1.0669129612391806
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972648,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0667674214773866,
+        "ratio_max_pre": 1.060663372989483
+      },
+      {
+        "drift_rate": 0.0,
+        "seed": 2783972649,
+        "pre_ops": 8000,
+        "post_ops": 60000,
+        "ladder_op": null,
+        "cusum_lag": null,
+        "cusum_false_positive": false,
+        "frac_flipped": 0.0,
+        "thresholds": {
+          "1.1": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "lag": null,
+            "fired_ops_post": 0,
+            "false_positive_ops": 0,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "10.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "20.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "50.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "100.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          },
+          "200.0": {
+            "lag": null,
+            "false_alarm": false,
+            "false_alarm_op": null
+          }
+        },
+        "ratio_max_post": 1.0789817754518118,
+        "ratio_max_pre": 1.063610378942261
+      }
+    ],
+    "summary": [
+      {
+        "drift_rate": 1.0,
+        "runs": 12,
+        "frac_flipped_mean": 1.0,
+        "ladder_op_median": 16896.0,
+        "ratio_max_post_median": 1.5068933597171448,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 1.0,
+          "lag_min": 1,
+          "lag_max": 1,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 2.5,
+            "lag_min": 1,
+            "lag_max": 3,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 6.0,
+            "lag_min": 4,
+            "lag_max": 7,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 17.0,
+            "lag_min": 14,
+            "lag_max": 18,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 1.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 3.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 7.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 25.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 87.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 319.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.5,
+        "runs": 12,
+        "frac_flipped_mean": 1.0,
+        "ladder_op_median": 34091.0,
+        "ratio_max_post_median": 1.335475072679854,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 3.0,
+          "lag_min": 1,
+          "lag_max": 8,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 5.0,
+            "lag_min": 2,
+            "lag_max": 15,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 14.0,
+            "lag_min": 6,
+            "lag_max": 25,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 3.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 6.5,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 18.5,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 8,
+            "of": 12,
+            "lag_median": 74.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.2,
+        "runs": 12,
+        "frac_flipped_mean": 0.4872334798177083,
+        "ladder_op_median": null,
+        "ratio_max_post_median": 1.2060706939832984,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 6.5,
+          "lag_min": 1,
+          "lag_max": 34,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 15.5,
+            "lag_min": 3,
+            "lag_max": 53,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 7,
+            "of": 12,
+            "lag_median": 70.0,
+            "lag_min": 45,
+            "lag_max": 9111,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 6.5,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 35.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 5,
+            "of": 12,
+            "lag_median": 58.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.05,
+        "runs": 12,
+        "frac_flipped_mean": 0.12148369683159722,
+        "ladder_op_median": null,
+        "ratio_max_post_median": 1.1770740168924934,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 60.5,
+          "lag_min": 2,
+          "lag_max": 720,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 178.5,
+            "lag_min": 3,
+            "lag_max": 1978,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 1,
+            "of": 12,
+            "lag_median": 58598.0,
+            "lag_min": 58598,
+            "lag_max": 58598,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 60.5,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 9,
+            "of": 12,
+            "lag_median": 8346.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.01,
+        "runs": 12,
+        "frac_flipped_mean": 0.024125840928819444,
+        "ladder_op_median": null,
+        "ratio_max_post_median": 1.135296351134114,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 2156.0,
+          "lag_min": 122,
+          "lag_max": 5723,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 13021.0,
+            "lag_min": 145,
+            "lag_max": 26896,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 2156.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 4,
+            "of": 12,
+            "lag_median": 38072.0,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.002,
+        "runs": 12,
+        "frac_flipped_mean": 0.004665798611111111,
+        "ladder_op_median": null,
+        "ratio_max_post_median": 1.0994563654266083,
+        "cusum": {
+          "detected": 12,
+          "of": 12,
+          "lag_median": 15738.5,
+          "lag_min": 1197,
+          "lag_max": 41165,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 6,
+            "of": 12,
+            "lag_median": 47097.5,
+            "lag_min": 10135,
+            "lag_max": 59960,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 12,
+            "of": 12,
+            "lag_median": 15738.5,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      },
+      {
+        "drift_rate": 0.0,
+        "runs": 12,
+        "frac_flipped_mean": 0.0,
+        "ladder_op_median": null,
+        "ratio_max_post_median": 1.06968897957256,
+        "cusum": {
+          "detected": 0,
+          "of": 12,
+          "lag_median": null,
+          "lag_min": null,
+          "lag_max": null,
+          "false_positive_runs": 0
+        },
+        "ratio": {
+          "1.1": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.2": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.4": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "1.7": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          },
+          "2.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "lag_min": null,
+            "lag_max": null,
+            "false_positive_rate": 0.0
+          }
+        },
+        "cusum_h": {
+          "5.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "10.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "20.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "50.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "100.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          },
+          "200.0": {
+            "detected": 0,
+            "of": 12,
+            "lag_median": null,
+            "false_alarm_runs": 0,
+            "false_alarm_rate": 0.0
+          }
+        }
+      }
+    ],
+    "wall_s": 33.585965875
+  },
+  "modeled_fields": [],
+  "failures": []
+}

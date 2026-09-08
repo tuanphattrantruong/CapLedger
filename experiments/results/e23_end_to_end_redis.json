@@ -1,0 +1,1699 @@
+{
+  "schema": "ccap-results-v1",
+  "experiment": "E23",
+  "title": "Completion-to-cgroup-reclaim integration under live Redis load",
+  "date_utc": "2026-09-08T07:10:41Z",
+  "wall_seconds": 22.92620086669922,
+  "host": {
+    "uname": "Linux <redacted-host> aarch64",
+    "python": "3.11.2",
+    "redis": "Redis server v=7.4.11 sha=00000000:0 malloc=jemalloc-5.3.0 bits=64 build=55587bd049513f17"
+  },
+  "config": {
+    "trials": 3,
+    "keys": 4096,
+    "value_bytes": 4096,
+    "cycles": 3,
+    "reclaim_mib": 2,
+    "queue_capacity": 1024,
+    "baseline_seconds": 0.5,
+    "between_seconds": 0.25,
+    "settle_seconds": 0.5,
+    "feedback_lib": "build/linux/libfeedback.so",
+    "out": "experiments/results/e23_end_to_end_redis.json"
+  },
+  "summary": {
+    "age": {
+      "trials": 3,
+      "selected_changed_tenant": 0,
+      "selected_unchanged_tenant": 3,
+      "reclaim_cycles": 9,
+      "reclaimed_mib_per_cycle_median": 2.22265625,
+      "reclaim_shortfall_cycles": 0,
+      "changed_throughput_ratio_median": 0.82134624852124,
+      "unchanged_throughput_ratio_median": 0.7859886612091457,
+      "changed_p99_ratio_median": 2.1324294057930837,
+      "unchanged_p99_ratio_median": 2.3041018831790656,
+      "get_errors": 0
+    },
+    "exact": {
+      "trials": 3,
+      "selected_changed_tenant": 3,
+      "selected_unchanged_tenant": 0,
+      "reclaim_cycles": 9,
+      "reclaimed_mib_per_cycle_median": 2.16796875,
+      "reclaim_shortfall_cycles": 1,
+      "changed_throughput_ratio_median": 0.7952739973617884,
+      "unchanged_throughput_ratio_median": 0.8320890611979272,
+      "changed_p99_ratio_median": 2.0614018627223545,
+      "unchanged_p99_ratio_median": 2.0193143335360544,
+      "get_errors": 0
+    },
+    "ledger": {
+      "trials": 3,
+      "selected_changed_tenant": 3,
+      "selected_unchanged_tenant": 0,
+      "reclaim_cycles": 9,
+      "reclaimed_mib_per_cycle_median": 2.16015625,
+      "reclaim_shortfall_cycles": 0,
+      "changed_throughput_ratio_median": 0.7820760304675751,
+      "unchanged_throughput_ratio_median": 0.8295332493561564,
+      "changed_p99_ratio_median": 1.885351953907812,
+      "unchanged_p99_ratio_median": 1.8883038401491217,
+      "get_errors": 0
+    }
+  },
+  "trials": [
+    {
+      "policy": "age",
+      "trial": 0,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 1,
+        "basis": "controlled age model: lowest median object-update epoch",
+        "median_update_epoch": [
+          1.0,
+          0.0
+        ]
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2330624,
+          "call_ms": 2.604458,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 25333760,
+          "after_current": 23003136,
+          "changed_tenant_delta_bytes": 4096,
+          "unchanged_tenant_delta_bytes": -2330624,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 3981312,
+          "call_ms": 2.672792,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 23556096,
+          "after_current": 19574784,
+          "changed_tenant_delta_bytes": 4096,
+          "unchanged_tenant_delta_bytes": -4218880,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2379776,
+          "call_ms": 2.06725,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 22667264,
+          "after_current": 20287488,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -2383872,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6911,
+            "errors": 0,
+            "throughput_ops_s": 13561.81543174939,
+            "p50_us": 71.208,
+            "p95_us": 108.5625,
+            "p99_us": 144.57499999999982
+          },
+          {
+            "operations": 6909,
+            "errors": 0,
+            "throughput_ops_s": 13557.890727529524,
+            "p50_us": 70.916,
+            "p95_us": 109.125,
+            "p99_us": 143.91036000000003
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 13641,
+            "errors": 0,
+            "throughput_ops_s": 11138.946228004823,
+            "p50_us": 76.417,
+            "p95_us": 161.75,
+            "p99_us": 305.86680000000064
+          },
+          {
+            "operations": 13050,
+            "errors": 0,
+            "throughput_ops_s": 10656.34838175082,
+            "p50_us": 77.542,
+            "p95_us": 179.98154999999997,
+            "p99_us": 351.93784000000045
+          }
+        ],
+        "settle": [
+          {
+            "operations": 7037,
+            "errors": 0,
+            "throughput_ops_s": 14045.973591330116,
+            "p50_us": 69.417,
+            "p95_us": 102.71719999999999,
+            "p99_us": 130.95500000000004
+          },
+          {
+            "operations": 7023,
+            "errors": 0,
+            "throughput_ops_s": 14018.029349426091,
+            "p50_us": 69.083,
+            "p95_us": 104.0419,
+            "p99_us": 131.98223999999988
+          }
+        ],
+        "transition_seconds": 0.445250625
+      },
+      "execution_index": 0
+    },
+    {
+      "policy": "exact",
+      "trial": 0,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "exact per-tenant compressed bytes; no statistical gate",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2338816,
+          "call_ms": 3.055875,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21643264,
+          "after_current": 19304448,
+          "changed_tenant_delta_bytes": -2342912,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2330624,
+          "call_ms": 2.934958,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21565440,
+          "after_current": 19234816,
+          "changed_tenant_delta_bytes": -2326528,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 7311360,
+          "call_ms": 4.877667,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21680128,
+          "after_current": 14368768,
+          "changed_tenant_delta_bytes": -6795264,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6950,
+            "errors": 0,
+            "throughput_ops_s": 13855.841433351907,
+            "p50_us": 70.208,
+            "p95_us": 105.03139999999985,
+            "p99_us": 133.27091000000001
+          },
+          {
+            "operations": 6962,
+            "errors": 0,
+            "throughput_ops_s": 13879.765188344745,
+            "p50_us": 70.2705,
+            "p95_us": 104.75,
+            "p99_us": 131.88175000000004
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 13111,
+            "errors": 0,
+            "throughput_ops_s": 10409.369565087012,
+            "p50_us": 78.083,
+            "p95_us": 190.0625,
+            "p99_us": 359.7417
+          },
+          {
+            "operations": 13944,
+            "errors": 0,
+            "throughput_ops_s": 11070.722997145398,
+            "p50_us": 75.7295,
+            "p95_us": 165.57684999999995,
+            "p99_us": 343.2855599999999
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6256,
+            "errors": 0,
+            "throughput_ops_s": 12394.107251820682,
+            "p50_us": 74.25,
+            "p95_us": 128.20775,
+            "p99_us": 216.46234999999973
+          },
+          {
+            "operations": 6304,
+            "errors": 0,
+            "throughput_ops_s": 12489.202703880688,
+            "p50_us": 74.25,
+            "p95_us": 120.78919999999984,
+            "p99_us": 214.66102000000004
+          }
+        ],
+        "transition_seconds": 0.466194167
+      },
+      "execution_index": 1
+    },
+    {
+      "policy": "ledger",
+      "trial": 0,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "completion-derived owned bytes minus purchased bytes",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2236416,
+          "call_ms": 3.172041,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21655552,
+          "after_current": 19419136,
+          "changed_tenant_delta_bytes": -2240512,
+          "unchanged_tenant_delta_bytes": -4096,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 4116480,
+          "call_ms": 3.252667,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21581824,
+          "after_current": 17465344,
+          "changed_tenant_delta_bytes": -4120576,
+          "unchanged_tenant_delta_bytes": -4096,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2117632,
+          "call_ms": 3.214458,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21458944,
+          "after_current": 19341312,
+          "changed_tenant_delta_bytes": -2121728,
+          "unchanged_tenant_delta_bytes": -4096,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6616,
+            "errors": 0,
+            "throughput_ops_s": 13215.048370272934,
+            "p50_us": 71.75,
+            "p95_us": 113.167,
+            "p99_us": 172.45440000000022
+          },
+          {
+            "operations": 6640,
+            "errors": 0,
+            "throughput_ops_s": 13262.98687705748,
+            "p50_us": 71.458,
+            "p95_us": 113.08509999999997,
+            "p99_us": 168.4569999999995
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 12754,
+            "errors": 0,
+            "throughput_ops_s": 10335.172571860054,
+            "p50_us": 79.708,
+            "p95_us": 191.15854999999954,
+            "p99_us": 325.1372399999998
+          },
+          {
+            "operations": 13577,
+            "errors": 0,
+            "throughput_ops_s": 11002.088600293551,
+            "p50_us": 77.0,
+            "p95_us": 170.77499999999986,
+            "p99_us": 318.0979999999997
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6851,
+            "errors": 0,
+            "throughput_ops_s": 13507.967049638006,
+            "p50_us": 71.958,
+            "p95_us": 107.917,
+            "p99_us": 151.22899999999998
+          },
+          {
+            "operations": 6896,
+            "errors": 0,
+            "throughput_ops_s": 13596.692566676937,
+            "p50_us": 71.125,
+            "p95_us": 108.56275,
+            "p99_us": 151.56075000000007
+          }
+        ],
+        "transition_seconds": 0.461093875
+      },
+      "execution_index": 2
+    },
+    {
+      "policy": "exact",
+      "trial": 1,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "exact per-tenant compressed bytes; no statistical gate",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2215936,
+          "call_ms": 3.098125,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21626880,
+          "after_current": 19410944,
+          "changed_tenant_delta_bytes": -2203648,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2969600,
+          "call_ms": 2.815875,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21553152,
+          "after_current": 18583552,
+          "changed_tenant_delta_bytes": -2969600,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2068480,
+          "call_ms": 2.674708,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21458944,
+          "after_current": 19390464,
+          "changed_tenant_delta_bytes": -2330624,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 28672,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 7092,
+            "errors": 0,
+            "throughput_ops_s": 13887.562996287617,
+            "p50_us": 69.4795,
+            "p95_us": 107.28734999999998,
+            "p99_us": 151.87878
+          },
+          {
+            "operations": 7110,
+            "errors": 0,
+            "throughput_ops_s": 13922.810618105606,
+            "p50_us": 69.5,
+            "p95_us": 107.083,
+            "p99_us": 147.57174999999998
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 13421,
+            "errors": 0,
+            "throughput_ops_s": 11075.115239891407,
+            "p50_us": 75.583,
+            "p95_us": 179.416,
+            "p99_us": 313.08319999999867
+          },
+          {
+            "operations": 14146,
+            "errors": 0,
+            "throughput_ops_s": 11673.390968147221,
+            "p50_us": 73.917,
+            "p95_us": 148.9065,
+            "p99_us": 297.9937499999992
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6477,
+            "errors": 0,
+            "throughput_ops_s": 12932.853697844315,
+            "p50_us": 72.042,
+            "p95_us": 121.77499999999998,
+            "p99_us": 204.82123999999996
+          },
+          {
+            "operations": 6522,
+            "errors": 0,
+            "throughput_ops_s": 13022.706780506503,
+            "p50_us": 71.667,
+            "p95_us": 122.19344999999996,
+            "p99_us": 199.99185999999997
+          }
+        ],
+        "transition_seconds": 0.427719
+      },
+      "execution_index": 3
+    },
+    {
+      "policy": "ledger",
+      "trial": 1,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "completion-derived owned bytes minus purchased bytes",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2207744,
+          "call_ms": 2.686042,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21680128,
+          "after_current": 19472384,
+          "changed_tenant_delta_bytes": -2191360,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2347008,
+          "call_ms": 2.530208,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21549056,
+          "after_current": 19202048,
+          "changed_tenant_delta_bytes": -2347008,
+          "unchanged_tenant_delta_bytes": -8192,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2273280,
+          "call_ms": 2.83825,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21450752,
+          "after_current": 19177472,
+          "changed_tenant_delta_bytes": -2273280,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6957,
+            "errors": 0,
+            "throughput_ops_s": 13668.658971129802,
+            "p50_us": 70.625,
+            "p95_us": 109.73379999999997,
+            "p99_us": 157.47647999999998
+          },
+          {
+            "operations": 6979,
+            "errors": 0,
+            "throughput_ops_s": 13711.88313346484,
+            "p50_us": 70.458,
+            "p95_us": 109.208,
+            "p99_us": 154.86974000000004
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 13243,
+            "errors": 0,
+            "throughput_ops_s": 10878.599415097724,
+            "p50_us": 76.958,
+            "p95_us": 180.3297,
+            "p99_us": 315.38172
+          },
+          {
+            "operations": 13882,
+            "errors": 0,
+            "throughput_ops_s": 11403.512578750026,
+            "p50_us": 75.209,
+            "p95_us": 153.57674999999986,
+            "p99_us": 308.6009800000021
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6780,
+            "errors": 0,
+            "throughput_ops_s": 13534.657463741056,
+            "p50_us": 72.3125,
+            "p95_us": 107.917,
+            "p99_us": 144.16196000000002
+          },
+          {
+            "operations": 6810,
+            "errors": 0,
+            "throughput_ops_s": 13594.545328624867,
+            "p50_us": 71.7085,
+            "p95_us": 106.85654999999997,
+            "p99_us": 143.36744
+          }
+        ],
+        "transition_seconds": 0.428445167
+      },
+      "execution_index": 4
+    },
+    {
+      "policy": "age",
+      "trial": 1,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 1,
+        "basis": "controlled age model: lowest median object-update epoch",
+        "median_update_epoch": [
+          1.0,
+          0.0
+        ]
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2203648,
+          "call_ms": 3.030791,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 25051136,
+          "after_current": 22847488,
+          "changed_tenant_delta_bytes": -102400,
+          "unchanged_tenant_delta_bytes": -2199552,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 3297280,
+          "call_ms": 3.364041,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 23195648,
+          "after_current": 19898368,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -3297280,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2531328,
+          "call_ms": 3.087209,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 22593536,
+          "after_current": 20062208,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -2506752,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6856,
+            "errors": 0,
+            "throughput_ops_s": 13707.7939827411,
+            "p50_us": 70.2705,
+            "p95_us": 109.4685,
+            "p99_us": 155.81074999999984
+          },
+          {
+            "operations": 6877,
+            "errors": 0,
+            "throughput_ops_s": 13749.781099666065,
+            "p50_us": 70.291,
+            "p95_us": 110.53319999999997,
+            "p99_us": 156.64999999999986
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 13761,
+            "errors": 0,
+            "throughput_ops_s": 11061.943790357636,
+            "p50_us": 75.625,
+            "p95_us": 170.25,
+            "p99_us": 344.41719999999987
+          },
+          {
+            "operations": 13183,
+            "errors": 0,
+            "throughput_ops_s": 10597.311604409906,
+            "p50_us": 77.375,
+            "p95_us": 180.8339,
+            "p99_us": 360.9375600000003
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6786,
+            "errors": 0,
+            "throughput_ops_s": 13279.080092020151,
+            "p50_us": 71.458,
+            "p95_us": 111.427,
+            "p99_us": 193.86509999999933
+          },
+          {
+            "operations": 6754,
+            "errors": 0,
+            "throughput_ops_s": 13216.461382479236,
+            "p50_us": 71.0835,
+            "p95_us": 112.86239999999995,
+            "p99_us": 198.60274
+          }
+        ],
+        "transition_seconds": 0.46012975
+      },
+      "execution_index": 5
+    },
+    {
+      "policy": "ledger",
+      "trial": 2,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "completion-derived owned bytes minus purchased bytes",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2236416,
+          "call_ms": 2.640917,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21671936,
+          "after_current": 19435520,
+          "changed_tenant_delta_bytes": -2232320,
+          "unchanged_tenant_delta_bytes": -102400,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2265088,
+          "call_ms": 2.37075,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21553152,
+          "after_current": 19288064,
+          "changed_tenant_delta_bytes": -2265088,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 7933952,
+          "call_ms": 4.079,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21422080,
+          "after_current": 13488128,
+          "changed_tenant_delta_bytes": -7933952,
+          "unchanged_tenant_delta_bytes": 4096,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 7417,
+            "errors": 0,
+            "throughput_ops_s": 14818.288909184037,
+            "p50_us": 65.375,
+            "p95_us": 103.1334,
+            "p99_us": 157.4134400000001
+          },
+          {
+            "operations": 7442,
+            "errors": 0,
+            "throughput_ops_s": 14868.23595283101,
+            "p50_us": 64.917,
+            "p95_us": 102.91394999999999,
+            "p99_us": 159.96200000000007
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 14067,
+            "errors": 0,
+            "throughput_ops_s": 11427.150218757912,
+            "p50_us": 74.208,
+            "p95_us": 171.33749999999986,
+            "p99_us": 284.9280000000003
+          },
+          {
+            "operations": 14997,
+            "errors": 0,
+            "throughput_ops_s": 12182.624001614588,
+            "p50_us": 71.458,
+            "p95_us": 144.583,
+            "p99_us": 272.36603999999824
+          }
+        ],
+        "settle": [
+          {
+            "operations": 7183,
+            "errors": 0,
+            "throughput_ops_s": 14267.089832960542,
+            "p50_us": 67.291,
+            "p95_us": 112.87439999999985,
+            "p99_us": 179.67000000000007
+          },
+          {
+            "operations": 7468,
+            "errors": 0,
+            "throughput_ops_s": 14833.165372761983,
+            "p50_us": 66.3335,
+            "p95_us": 101.02664999999999,
+            "p99_us": 131.33249999999998
+          }
+        ],
+        "transition_seconds": 0.440148625
+      },
+      "execution_index": 6
+    },
+    {
+      "policy": "age",
+      "trial": 2,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 1,
+        "basis": "controlled age model: lowest median object-update epoch",
+        "median_update_epoch": [
+          1.0,
+          0.0
+        ]
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2203648,
+          "call_ms": 2.9055,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 25333760,
+          "after_current": 23130112,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -2207744,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2105344,
+          "call_ms": 1.687458,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 23363584,
+          "after_current": 21258240,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -2105344,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 1,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2236416,
+          "call_ms": 2.234958,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 23040000,
+          "after_current": 20803584,
+          "changed_tenant_delta_bytes": 0,
+          "unchanged_tenant_delta_bytes": -2232320,
+          "unpaid_debt_bytes": 0,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6625,
+            "errors": 0,
+            "throughput_ops_s": 13234.676441636873,
+            "p50_us": 72.875,
+            "p95_us": 106.81639999999994,
+            "p99_us": 142.9111600000001
+          },
+          {
+            "operations": 6656,
+            "errors": 0,
+            "throughput_ops_s": 13296.604738948683,
+            "p50_us": 72.667,
+            "p95_us": 105.86425,
+            "p99_us": 140.97279999999998
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 14032,
+            "errors": 0,
+            "throughput_ops_s": 11597.609151220453,
+            "p50_us": 74.0,
+            "p95_us": 156.54145,
+            "p99_us": 304.74796000000055
+          },
+          {
+            "operations": 13664,
+            "errors": 0,
+            "throughput_ops_s": 11293.452924905663,
+            "p50_us": 75.041,
+            "p95_us": 168.5107999999997,
+            "p99_us": 292.2834199999983
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6230,
+            "errors": 0,
+            "throughput_ops_s": 12432.562379164425,
+            "p50_us": 74.375,
+            "p95_us": 129.1605999999998,
+            "p99_us": 220.3234300000001
+          },
+          {
+            "operations": 6182,
+            "errors": 0,
+            "throughput_ops_s": 12336.77377656412,
+            "p50_us": 74.416,
+            "p95_us": 125.08095,
+            "p99_us": 216.60526999999988
+          }
+        ],
+        "transition_seconds": 0.430500751
+      },
+      "execution_index": 7
+    },
+    {
+      "policy": "exact",
+      "trial": 2,
+      "configuration": {
+        "keys": 4096,
+        "value_bytes": 4096,
+        "logical_mib_per_tenant": 16.0,
+        "cycles": 3,
+        "reclaim_mib_per_cycle": 2
+      },
+      "pricing": {
+        "q_requested": 0.99,
+        "interpretation": "empirical target under representative-iid assumption",
+        "quote_stage": "before initial Redis object allocation",
+        "quote_implementation": "controller model, not contract_admit",
+        "initial_owned_bytes": 524288,
+        "purchased_bytes": 524288,
+        "exact_debt_bytes": [
+          16252928,
+          0
+        ],
+        "ledger_debt_bytes": [
+          16252928,
+          0
+        ]
+      },
+      "completion_path": {
+        "records_issued": 4112,
+        "records_applied": 4104,
+        "records_dropped": 8,
+        "gap_events": 1,
+        "gap_records": 8,
+        "telemetry_debt_before_resync": 32768,
+        "telemetry_debt_after_resync": 0,
+        "empirical_admission_attempted_after_gap": true,
+        "empirical_admission_blocked_after_gap": true,
+        "admission_gate_result": "blocked_pending_snapshot",
+        "snapshot_pages": 8192,
+        "snapshot_source": "controller oracle over sizes of values issued to Redis",
+        "host_owned_before_resync": [
+          16745472,
+          524288
+        ],
+        "host_owned_after_resync": [
+          16777216,
+          524288
+        ],
+        "actual_owned_after": [
+          16777216,
+          524288
+        ],
+        "mean_size_after": 4096.0
+      },
+      "detector": {
+        "role": "advisory only",
+        "mean_ratio": 32.0,
+        "triggered": true
+      },
+      "selection": {
+        "victim": 0,
+        "basis": "exact per-tenant compressed bytes; no statistical gate",
+        "median_update_epoch": null
+      },
+      "reclaim_cycles": [
+        {
+          "cycle": 0,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2273280,
+          "call_ms": 2.804583,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21676032,
+          "after_current": 19402752,
+          "changed_tenant_delta_bytes": -2019328,
+          "unchanged_tenant_delta_bytes": -57344,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 1,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2138112,
+          "call_ms": 1.24075,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 19533824,
+          "after_current": 17395712,
+          "changed_tenant_delta_bytes": -1871872,
+          "unchanged_tenant_delta_bytes": 0,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        },
+        {
+          "cycle": 2,
+          "victim": 0,
+          "requested_bytes": 2097152,
+          "reclaimed_bytes": 2211840,
+          "call_ms": 2.984875,
+          "error": "swappiness=max rejected: [Errno 22] Invalid argument",
+          "before_current": 21544960,
+          "after_current": 19333120,
+          "changed_tenant_delta_bytes": -2211840,
+          "unchanged_tenant_delta_bytes": 4096,
+          "unpaid_debt_bytes": 16252928,
+          "compressed_debt_discharged_bytes": 0,
+          "debt_reconciliation": "requires compressed-tier release feedback; not memory.current",
+          "shortfall_bytes": 0,
+          "shortfall_policy_executed": false,
+          "prescribed_shortfall_policy": "retain debt, block empirical admission, notify, and retry the debtor; at the hard watermark spill globally or reject and record an attribution breach"
+        }
+      ],
+      "application": {
+        "baseline": [
+          {
+            "operations": 6474,
+            "errors": 0,
+            "throughput_ops_s": 12933.308821709863,
+            "p50_us": 73.042,
+            "p95_us": 116.46009999999993,
+            "p99_us": 181.99624999999935
+          },
+          {
+            "operations": 6505,
+            "errors": 0,
+            "throughput_ops_s": 12995.238474702295,
+            "p50_us": 73.041,
+            "p95_us": 114.35819999999994,
+            "p99_us": 178.78532
+          }
+        ],
+        "transition_and_recovery": [
+          {
+            "operations": 12631,
+            "errors": 0,
+            "throughput_ops_s": 10285.524205755684,
+            "p50_us": 79.416,
+            "p95_us": 191.167,
+            "p99_us": 356.0125000000021
+          },
+          {
+            "operations": 13279,
+            "errors": 0,
+            "throughput_ops_s": 10813.195782458217,
+            "p50_us": 77.875,
+            "p95_us": 169.75419999999994,
+            "p99_us": 311.4110199999996
+          }
+        ],
+        "settle": [
+          {
+            "operations": 6493,
+            "errors": 0,
+            "throughput_ops_s": 12892.45664069563,
+            "p50_us": 74.0,
+            "p95_us": 116.47479999999999,
+            "p99_us": 167.67607999999998
+          },
+          {
+            "operations": 6523,
+            "errors": 0,
+            "throughput_ops_s": 12952.024436663729,
+            "p50_us": 73.708,
+            "p95_us": 115.61669999999997,
+            "p99_us": 163.28276
+          }
+        ],
+        "transition_seconds": 0.442092541
+      },
+      "execution_index": 8
+    }
+  ],
+  "metric_classes": {
+    "measured": [
+      "Redis GET throughput/latency/value-integrity errors",
+      "memory.current deltas",
+      "memory.reclaim call time"
+    ],
+    "counted": [
+      "completion records/drops/gaps",
+      "selected tenant",
+      "reservation and debt bytes"
+    ],
+    "modeled": [
+      "empirical admission quote",
+      "age-policy selection",
+      "controller-oracle resynchronization snapshot",
+      "prescribed shortfall response"
+    ]
+  },
+  "scope": "software end-to-end path; size records are computed from the values written to Redis and traverse the shipped C queue, but are not emitted by zswap, a kernel page hook, or CXL hardware; age is a controlled policy model, not a zswap port",
+  "failures": []
+}

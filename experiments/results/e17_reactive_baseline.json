@@ -1,0 +1,866 @@
+{
+  "schema": "ccap-results-v1",
+  "experiment": "E17",
+  "title": "Tenant-aware exact-accounting reactive baseline",
+  "date_utc": "Tue Sep  8 07:22:12 UTC 2026",
+  "wall_seconds": 22.453,
+  "host": {
+    "uname": "Darwin 25.5.0 arm64",
+    "ncpu": 32,
+    "memsize": 549755813888,
+    "os": "macOS 26.5.2"
+  },
+  "toolchain": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "python": "3.14.7",
+    "numpy": "2.5.2",
+    "zlib": "1.2.12"
+  },
+  "config": {
+    "trace": "identical E5 80k-op entropy bomb",
+    "pool_bytes": 100663296,
+    "extent_bytes": 1048576,
+    "n_tenants": 4,
+    "seeds": 5,
+    "admission": "always open",
+    "reservation": "none",
+    "victim_order": "owned-minus-purchased byte overdraft, then CLOCK"
+  },
+  "seeds": [
+    2783972638,
+    2783972639,
+    2783972640,
+    2783972641,
+    2783972642
+  ],
+  "data": {
+    "summary": {
+      "label": "reactive_tenant",
+      "runs": 5,
+      "bomber_violations_mean": 3276.8,
+      "victim_violations_mean": 0.0,
+      "forced_spills_mean": 3276.8,
+      "hard_failures_total": 0,
+      "invariant_breaches_total": 0
+    },
+    "runs": [
+      {
+        "label": "reactive_tenant",
+        "seed": 2783972638,
+        "admissions": [
+          {
+            "tenant": 0,
+            "requested_guar": 6620,
+            "granted_guar_upfront": 6620,
+            "granted_guar": 6620,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 1,
+            "requested_guar": 6643,
+            "granted_guar_upfront": 6643,
+            "granted_guar": 6643,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 2,
+            "requested_guar": 6644,
+            "granted_guar_upfront": 6644,
+            "granted_guar": 6644,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 3,
+            "requested_guar": 11344,
+            "granted_guar_upfront": 11344,
+            "granted_guar": 11344,
+            "topups": 0,
+            "attempts": 1
+          }
+        ],
+        "replay_counts": {
+          "write_ok": {
+            "0": 53482,
+            "1": 7777
+          },
+          "eagain": {
+            "0": 0,
+            "1": 3
+          },
+          "enospace": {
+            "0": 0,
+            "1": 0
+          },
+          "write_other_err": {
+            "0": 0,
+            "1": 0
+          },
+          "read_ok": 17625,
+          "read_err": 1113,
+          "free_ok": 0,
+          "free_err": 0
+        },
+        "shed": {
+          "0": {
+            "calls": 6,
+            "freed": 1189
+          },
+          "1": {
+            "calls": 6,
+            "freed": 1182
+          },
+          "2": {
+            "calls": 6,
+            "freed": 1176
+          },
+          "3": {
+            "calls": 6,
+            "freed": 2073
+          }
+        },
+        "per_tenant": [
+          {
+            "tenant": 0,
+            "content": "TEXT",
+            "requested_guar": 6620,
+            "granted_guar": 6620,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10247,
+            "written_opp": 1510,
+            "hard_failures": 0,
+            "overdraft_bytes": 14751232.0
+          },
+          {
+            "tenant": 1,
+            "content": "JSON",
+            "requested_guar": 6643,
+            "granted_guar": 6643,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10198,
+            "written_opp": 1482,
+            "hard_failures": 0,
+            "overdraft_bytes": 9350272.0
+          },
+          {
+            "tenant": 2,
+            "content": "FLOATQ",
+            "requested_guar": 6644,
+            "granted_guar": 6644,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10349,
+            "written_opp": 1476,
+            "hard_failures": 0,
+            "overdraft_bytes": 24733824.0
+          },
+          {
+            "tenant": 3,
+            "content": "TEXT",
+            "requested_guar": 11344,
+            "granted_guar": 11344,
+            "violations": 3072,
+            "r3_forced_spills": 3072,
+            "opp_drops": 3,
+            "written_guar": 22688,
+            "written_opp": 3309,
+            "hard_failures": 0,
+            "overdraft_bytes": 46678016.0
+          }
+        ],
+        "global": {
+          "violations": 3072,
+          "r1_spills": 8797,
+          "r2_shed_calls": 24,
+          "r2_shed_bytes": 0,
+          "r3_forced_spills": 3072,
+          "opp_drops": 3,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "resv_bytes": 0
+        },
+        "invariant_samples": {
+          "samples": 80,
+          "failed": 0,
+          "first_failed_op": null
+        },
+        "final_phys_used": 85004416,
+        "pages_spilled": 2591,
+        "isolation": {
+          "bomber_violations": 3072,
+          "max_victim_violations": 0,
+          "total_victim_violations": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "hard_failures_by_tenant": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "label": "reactive_tenant",
+        "seed": 2783972639,
+        "admissions": [
+          {
+            "tenant": 0,
+            "requested_guar": 6688,
+            "granted_guar_upfront": 6688,
+            "granted_guar": 6688,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 1,
+            "requested_guar": 6633,
+            "granted_guar_upfront": 6633,
+            "granted_guar": 6633,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 2,
+            "requested_guar": 6679,
+            "granted_guar_upfront": 6679,
+            "granted_guar": 6679,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 3,
+            "requested_guar": 11405,
+            "granted_guar_upfront": 11405,
+            "granted_guar": 11405,
+            "topups": 0,
+            "attempts": 1
+          }
+        ],
+        "replay_counts": {
+          "write_ok": {
+            "0": 53811,
+            "1": 7499
+          },
+          "eagain": {
+            "0": 0,
+            "1": 0
+          },
+          "enospace": {
+            "0": 0,
+            "1": 0
+          },
+          "write_other_err": {
+            "0": 0,
+            "1": 0
+          },
+          "read_ok": 17518,
+          "read_err": 1172,
+          "free_ok": 0,
+          "free_err": 0
+        },
+        "shed": {
+          "0": {
+            "calls": 6,
+            "freed": 1133
+          },
+          "1": {
+            "calls": 6,
+            "freed": 1201
+          },
+          "2": {
+            "calls": 6,
+            "freed": 1157
+          },
+          "3": {
+            "calls": 6,
+            "freed": 2022
+          }
+        },
+        "per_tenant": [
+          {
+            "tenant": 0,
+            "content": "TEXT",
+            "requested_guar": 6688,
+            "granted_guar": 6688,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10415,
+            "written_opp": 1419,
+            "hard_failures": 0,
+            "overdraft_bytes": 14896256.0
+          },
+          {
+            "tenant": 1,
+            "content": "JSON",
+            "requested_guar": 6633,
+            "granted_guar": 6633,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10255,
+            "written_opp": 1467,
+            "hard_failures": 0,
+            "overdraft_bytes": 9344384.0
+          },
+          {
+            "tenant": 2,
+            "content": "FLOATQ",
+            "requested_guar": 6679,
+            "granted_guar": 6679,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10331,
+            "written_opp": 1423,
+            "hard_failures": 0,
+            "overdraft_bytes": 24896768.0
+          },
+          {
+            "tenant": 3,
+            "content": "TEXT",
+            "requested_guar": 11405,
+            "granted_guar": 11405,
+            "violations": 3072,
+            "r3_forced_spills": 3072,
+            "opp_drops": 0,
+            "written_guar": 22810,
+            "written_opp": 3190,
+            "hard_failures": 0,
+            "overdraft_bytes": 46993408.0
+          }
+        ],
+        "global": {
+          "violations": 3072,
+          "r1_spills": 8346,
+          "r2_shed_calls": 24,
+          "r2_shed_bytes": 0,
+          "r3_forced_spills": 3072,
+          "opp_drops": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "resv_bytes": 0
+        },
+        "invariant_samples": {
+          "samples": 80,
+          "failed": 0,
+          "first_failed_op": null
+        },
+        "final_phys_used": 85660416,
+        "pages_spilled": 2584,
+        "isolation": {
+          "bomber_violations": 3072,
+          "max_victim_violations": 0,
+          "total_victim_violations": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "hard_failures_by_tenant": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "label": "reactive_tenant",
+        "seed": 2783972640,
+        "admissions": [
+          {
+            "tenant": 0,
+            "requested_guar": 6656,
+            "granted_guar_upfront": 6656,
+            "granted_guar": 6656,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 1,
+            "requested_guar": 6673,
+            "granted_guar_upfront": 6673,
+            "granted_guar": 6673,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 2,
+            "requested_guar": 6657,
+            "granted_guar_upfront": 6657,
+            "granted_guar": 6657,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 3,
+            "requested_guar": 11405,
+            "granted_guar_upfront": 11405,
+            "granted_guar": 11405,
+            "topups": 0,
+            "attempts": 1
+          }
+        ],
+        "replay_counts": {
+          "write_ok": {
+            "0": 53622,
+            "1": 7505
+          },
+          "eagain": {
+            "0": 0,
+            "1": 1
+          },
+          "enospace": {
+            "0": 0,
+            "1": 0
+          },
+          "write_other_err": {
+            "0": 0,
+            "1": 0
+          },
+          "read_ok": 17862,
+          "read_err": 1010,
+          "free_ok": 0,
+          "free_err": 0
+        },
+        "shed": {
+          "0": {
+            "calls": 6,
+            "freed": 1152
+          },
+          "1": {
+            "calls": 6,
+            "freed": 1145
+          },
+          "2": {
+            "calls": 6,
+            "freed": 1132
+          },
+          "3": {
+            "calls": 6,
+            "freed": 1933
+          }
+        },
+        "per_tenant": [
+          {
+            "tenant": 0,
+            "content": "TEXT",
+            "requested_guar": 6656,
+            "granted_guar": 6656,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10262,
+            "written_opp": 1469,
+            "hard_failures": 0,
+            "overdraft_bytes": 14865152.0
+          },
+          {
+            "tenant": 1,
+            "content": "JSON",
+            "requested_guar": 6673,
+            "granted_guar": 6673,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10259,
+            "written_opp": 1427,
+            "hard_failures": 0,
+            "overdraft_bytes": 9383936.0
+          },
+          {
+            "tenant": 2,
+            "content": "FLOATQ",
+            "requested_guar": 6657,
+            "granted_guar": 6657,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10291,
+            "written_opp": 1420,
+            "hard_failures": 0,
+            "overdraft_bytes": 24789888.0
+          },
+          {
+            "tenant": 3,
+            "content": "TEXT",
+            "requested_guar": 11405,
+            "granted_guar": 11405,
+            "violations": 3072,
+            "r3_forced_spills": 3072,
+            "opp_drops": 1,
+            "written_guar": 22810,
+            "written_opp": 3189,
+            "hard_failures": 0,
+            "overdraft_bytes": 46948352.0
+          }
+        ],
+        "global": {
+          "violations": 3072,
+          "r1_spills": 8525,
+          "r2_shed_calls": 24,
+          "r2_shed_bytes": 0,
+          "r3_forced_spills": 3072,
+          "opp_drops": 1,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "resv_bytes": 0
+        },
+        "invariant_samples": {
+          "samples": 80,
+          "failed": 0,
+          "first_failed_op": null
+        },
+        "final_phys_used": 85318144,
+        "pages_spilled": 2627,
+        "isolation": {
+          "bomber_violations": 3072,
+          "max_victim_violations": 0,
+          "total_victim_violations": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "hard_failures_by_tenant": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "label": "reactive_tenant",
+        "seed": 2783972641,
+        "admissions": [
+          {
+            "tenant": 0,
+            "requested_guar": 6593,
+            "granted_guar_upfront": 6593,
+            "granted_guar": 6593,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 1,
+            "requested_guar": 6648,
+            "granted_guar_upfront": 6648,
+            "granted_guar": 6648,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 2,
+            "requested_guar": 6628,
+            "granted_guar_upfront": 6628,
+            "granted_guar": 6628,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 3,
+            "requested_guar": 11430,
+            "granted_guar_upfront": 11430,
+            "granted_guar": 11430,
+            "topups": 0,
+            "attempts": 1
+          }
+        ],
+        "replay_counts": {
+          "write_ok": {
+            "0": 53587,
+            "1": 7686
+          },
+          "eagain": {
+            "0": 0,
+            "1": 0
+          },
+          "enospace": {
+            "0": 0,
+            "1": 0
+          },
+          "write_other_err": {
+            "0": 0,
+            "1": 0
+          },
+          "read_ok": 17626,
+          "read_err": 1101,
+          "free_ok": 0,
+          "free_err": 0
+        },
+        "shed": {
+          "0": {
+            "calls": 7,
+            "freed": 1222
+          },
+          "1": {
+            "calls": 7,
+            "freed": 1205
+          },
+          "2": {
+            "calls": 7,
+            "freed": 1219
+          },
+          "3": {
+            "calls": 7,
+            "freed": 2040
+          }
+        },
+        "per_tenant": [
+          {
+            "tenant": 0,
+            "content": "TEXT",
+            "requested_guar": 6593,
+            "granted_guar": 6593,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10238,
+            "written_opp": 1517,
+            "hard_failures": 0,
+            "overdraft_bytes": 14661888.0
+          },
+          {
+            "tenant": 1,
+            "content": "JSON",
+            "requested_guar": 6648,
+            "granted_guar": 6648,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10259,
+            "written_opp": 1511,
+            "hard_failures": 0,
+            "overdraft_bytes": 9342336.0
+          },
+          {
+            "tenant": 2,
+            "content": "FLOATQ",
+            "requested_guar": 6628,
+            "granted_guar": 6628,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10230,
+            "written_opp": 1518,
+            "hard_failures": 0,
+            "overdraft_bytes": 24648320.0
+          },
+          {
+            "tenant": 3,
+            "content": "TEXT",
+            "requested_guar": 11430,
+            "granted_guar": 11430,
+            "violations": 3584,
+            "r3_forced_spills": 3584,
+            "opp_drops": 0,
+            "written_guar": 22860,
+            "written_opp": 3140,
+            "hard_failures": 0,
+            "overdraft_bytes": 47001600.0
+          }
+        ],
+        "global": {
+          "violations": 3584,
+          "r1_spills": 8691,
+          "r2_shed_calls": 28,
+          "r2_shed_bytes": 0,
+          "r3_forced_spills": 3584,
+          "opp_drops": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "resv_bytes": 0
+        },
+        "invariant_samples": {
+          "samples": 80,
+          "failed": 0,
+          "first_failed_op": null
+        },
+        "final_phys_used": 83446016,
+        "pages_spilled": 2999,
+        "isolation": {
+          "bomber_violations": 3584,
+          "max_victim_violations": 0,
+          "total_victim_violations": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "hard_failures_by_tenant": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "label": "reactive_tenant",
+        "seed": 2783972642,
+        "admissions": [
+          {
+            "tenant": 0,
+            "requested_guar": 6673,
+            "granted_guar_upfront": 6673,
+            "granted_guar": 6673,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 1,
+            "requested_guar": 6649,
+            "granted_guar_upfront": 6649,
+            "granted_guar": 6649,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 2,
+            "requested_guar": 6679,
+            "granted_guar_upfront": 6679,
+            "granted_guar": 6679,
+            "topups": 0,
+            "attempts": 1
+          },
+          {
+            "tenant": 3,
+            "requested_guar": 11393,
+            "granted_guar_upfront": 11393,
+            "granted_guar": 11393,
+            "topups": 0,
+            "attempts": 1
+          }
+        ],
+        "replay_counts": {
+          "write_ok": {
+            "0": 53753,
+            "1": 7510
+          },
+          "eagain": {
+            "0": 0,
+            "1": 1
+          },
+          "enospace": {
+            "0": 0,
+            "1": 0
+          },
+          "write_other_err": {
+            "0": 0,
+            "1": 0
+          },
+          "read_ok": 17633,
+          "read_err": 1103,
+          "free_ok": 0,
+          "free_err": 0
+        },
+        "shed": {
+          "0": {
+            "calls": 7,
+            "freed": 1176
+          },
+          "1": {
+            "calls": 7,
+            "freed": 1210
+          },
+          "2": {
+            "calls": 7,
+            "freed": 1169
+          },
+          "3": {
+            "calls": 7,
+            "freed": 2143
+          }
+        },
+        "per_tenant": [
+          {
+            "tenant": 0,
+            "content": "TEXT",
+            "requested_guar": 6673,
+            "granted_guar": 6673,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10333,
+            "written_opp": 1428,
+            "hard_failures": 0,
+            "overdraft_bytes": 14870528.0
+          },
+          {
+            "tenant": 1,
+            "content": "JSON",
+            "requested_guar": 6649,
+            "granted_guar": 6649,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10302,
+            "written_opp": 1467,
+            "hard_failures": 0,
+            "overdraft_bytes": 9326080.0
+          },
+          {
+            "tenant": 2,
+            "content": "FLOATQ",
+            "requested_guar": 6679,
+            "granted_guar": 6679,
+            "violations": 0,
+            "r3_forced_spills": 0,
+            "opp_drops": 0,
+            "written_guar": 10332,
+            "written_opp": 1402,
+            "hard_failures": 0,
+            "overdraft_bytes": 24811264.0
+          },
+          {
+            "tenant": 3,
+            "content": "TEXT",
+            "requested_guar": 11393,
+            "granted_guar": 11393,
+            "violations": 3584,
+            "r3_forced_spills": 3584,
+            "opp_drops": 1,
+            "written_guar": 22786,
+            "written_opp": 3213,
+            "hard_failures": 0,
+            "overdraft_bytes": 46690304.0
+          }
+        ],
+        "global": {
+          "violations": 3584,
+          "r1_spills": 8456,
+          "r2_shed_calls": 28,
+          "r2_shed_bytes": 0,
+          "r3_forced_spills": 3584,
+          "opp_drops": 1,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "resv_bytes": 0
+        },
+        "invariant_samples": {
+          "samples": 80,
+          "failed": 0,
+          "first_failed_op": null
+        },
+        "final_phys_used": 83782144,
+        "pages_spilled": 2912,
+        "isolation": {
+          "bomber_violations": 3584,
+          "max_victim_violations": 0,
+          "total_victim_violations": 0,
+          "hard_failures": 0,
+          "invariant_breaches": 0,
+          "hard_failures_by_tenant": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "modeled_fields": [],
+  "failures": []
+}

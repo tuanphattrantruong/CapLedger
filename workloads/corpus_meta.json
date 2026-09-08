@@ -1,0 +1,240 @@
+{
+  "schema": "ccap-corpus-v1",
+  "seed": 2783972638,
+  "date_utc": "Fri Aug 28 20:50:58 UTC 2026",
+  "corpus_bytes": 16777216,
+  "text": {
+    "path": "<user-home>/Documents/Claude/Projects/ASPLOS27/3-capacity-contract/workloads/corpus_text.bin",
+    "bytes": 16777216,
+    "sha256": "7250dde01e3555408552429725e9be6684824ac20e32d4c90821df4b27867280",
+    "sources": [
+      "/usr/share/dict/words",
+      "/usr/share/misc/ASFCoreTrace.codes",
+      "/usr/share/misc/ASFPreASP3CoreTrace.codes",
+      "/usr/share/misc/ascii",
+      "/usr/share/misc/birthtoken",
+      "/usr/share/misc/eqnchar",
+      "/usr/share/misc/flowers",
+      "/usr/share/misc/getopt",
+      "/usr/share/misc/mail.help",
+      "/usr/share/misc/mail.tildehelp",
+      "/usr/share/misc/man.template",
+      "/usr/share/misc/mdoc.template",
+      "/usr/share/misc/msp_boot_loader_hynix_cdie.release.cald",
+      "/usr/share/misc/msp_boot_loader_hynix_tlc_1y.release.cald",
+      "/usr/share/misc/msp_boot_loader_hynix_tlc_1z.release.cald",
+      "/usr/share/misc/msp_boot_loader_samsung_mlc_3d_v3_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_samsung_tlc_1y_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk_TLC_1y_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk_TLC_1z_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk_TLC_1z_2p_8dpc.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk_mlc_1z_2p_128Gb.release.cald",
+      "/usr/share/misc/msp_boot_loader_sandisk_tlc_3d_g2_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba_mlc_1z_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba_mlc_1z_2p_128Gb.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba_tlc_1z_2p.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba_tlc_1z_2p_8dpc.release.cald",
+      "/usr/share/misc/msp_boot_loader_toshiba_tlc_3d_g2_2p.release.cald",
+      "/usr/share/misc/msp_core_hynix_cdie-coverage.release.cald",
+      "/usr/share/misc/msp_core_hynix_cdie-coverage.release.coverage",
+      "/usr/share/misc/msp_core_hynix_cdie.release.cald",
+      "/usr/share/misc/msp_core_hynix_tlc_1y-coverage.release.cald",
+      "/usr/share/misc/msp_core_hynix_tlc_1y-coverage.release.coverage",
+      "/usr/share/misc/msp_core_hynix_tlc_1y.release.cald",
+      "/usr/share/misc/msp_core_hynix_tlc_1z-coverage.release.cald",
+      "/usr/share/misc/msp_core_hynix_tlc_1z-coverage.release.coverage",
+      "/usr/share/misc/msp_core_hynix_tlc_1z.release.cald",
+      "/usr/share/misc/msp_core_samsung_mlc_3d_v3_2p-coverage.release.cald",
+      "/usr/share/misc/msp_core_samsung_mlc_3d_v3_2p-coverage.release.coverage"
+    ],
+    "tiles": 6,
+    "extra_text_bytes": 2097152,
+    "word_lines": 235976
+  },
+  "binary": {
+    "path": "<user-home>/Documents/Claude/Projects/ASPLOS27/3-capacity-contract/workloads/corpus_binary.bin",
+    "bytes": 16777216,
+    "sha256": "46722b8d2e2f052df7ccbd852749bffe6b80e2f41386f3b05e008fc1bf4e7b11",
+    "sources": [
+      {
+        "path": "/usr/lib/dyld",
+        "bytes": 2374000
+      },
+      {
+        "path": "/bin/[",
+        "bytes": 101456
+      },
+      {
+        "path": "/bin/bash",
+        "bytes": 1293840
+      },
+      {
+        "path": "/bin/cat",
+        "bytes": 118992
+      },
+      {
+        "path": "/bin/chmod",
+        "bytes": 120656
+      },
+      {
+        "path": "/bin/cp",
+        "bytes": 153360
+      },
+      {
+        "path": "/bin/csh",
+        "bytes": 1094688
+      },
+      {
+        "path": "/bin/dash",
+        "bytes": 274288
+      },
+      {
+        "path": "/bin/date",
+        "bytes": 135392
+      },
+      {
+        "path": "/bin/dd",
+        "bytes": 152576
+      },
+      {
+        "path": "/bin/df",
+        "bytes": 119152
+      },
+      {
+        "path": "/bin/echo",
+        "bytes": 101136
+      },
+      {
+        "path": "/bin/ed",
+        "bytes": 202528
+      },
+      {
+        "path": "/bin/expr",
+        "bytes": 102000
+      },
+      {
+        "path": "/bin/hostname",
+        "bytes": 101184
+      },
+      {
+        "path": "/bin/kill",
+        "bytes": 101504
+      },
+      {
+        "path": "/bin/ksh",
+        "bytes": 2549552
+      },
+      {
+        "path": "/bin/launchctl",
+        "bytes": 364448
+      },
+      {
+        "path": "/bin/link",
+        "bytes": 102192
+      },
+      {
+        "path": "/bin/ln",
+        "bytes": 102192
+      },
+      {
+        "path": "/bin/ls",
+        "bytes": 154624
+      },
+      {
+        "path": "/bin/mkdir",
+        "bytes": 101472
+      },
+      {
+        "path": "/bin/mv",
+        "bytes": 119440
+      },
+      {
+        "path": "/bin/pax",
+        "bytes": 304704
+      },
+      {
+        "path": "/bin/ps",
+        "bytes": 170816
+      },
+      {
+        "path": "/bin/pwd",
+        "bytes": 101296
+      },
+      {
+        "path": "/bin/realpath",
+        "bytes": 101072
+      },
+      {
+        "path": "/bin/rm",
+        "bytes": 119184
+      },
+      {
+        "path": "/bin/rmdir",
+        "bytes": 101120
+      },
+      {
+        "path": "/bin/sh",
+        "bytes": 101232
+      },
+      {
+        "path": "/bin/sleep",
+        "bytes": 101168
+      },
+      {
+        "path": "/bin/stty",
+        "bytes": 135504
+      },
+      {
+        "path": "/bin/sync",
+        "bytes": 100784
+      },
+      {
+        "path": "/bin/tcsh",
+        "bytes": 1094688
+      },
+      {
+        "path": "/bin/test",
+        "bytes": 101472
+      },
+      {
+        "path": "/bin/unlink",
+        "bytes": 119184
+      },
+      {
+        "path": "/bin/wait4path",
+        "bytes": 101056
+      },
+      {
+        "path": "/bin/zsh",
+        "bytes": 1361216
+      },
+      {
+        "path": "/usr/lib/libLeaksAtExit.dylib",
+        "bytes": 118112
+      },
+      {
+        "path": "/usr/lib/libRPAC.dylib",
+        "bytes": 1237248
+      },
+      {
+        "path": "/usr/lib/libffi-trampolines.dylib",
+        "bytes": 100704
+      },
+      {
+        "path": "/usr/lib/libgmalloc.dylib",
+        "bytes": 190960
+      },
+      {
+        "path": "/usr/lib/libobjc-trampolines.dylib",
+        "bytes": 248480
+      },
+      {
+        "path": "/usr/lib/ssh-keychain.dylib",
+        "bytes": 241216
+      }
+    ],
+    "tiled_to_fill": true
+  }
+}

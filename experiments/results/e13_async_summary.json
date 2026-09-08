@@ -1,0 +1,53 @@
+{
+  "experiment": "E13_async_feedback",
+  "runs": 3,
+  "records_per_cell_per_run": 100000,
+  "producer_gap_ns": 5000,
+  "cells": [
+    {
+      "name": "busy_batch1",
+      "poll_ns": 0,
+      "batch": 1,
+      "latency_ns_p50_median": 0,
+      "latency_ns_p99_median": 7000,
+      "max_depth_worst": 118,
+      "headroom_bytes_worst": 483328,
+      "drops": 0,
+      "gaps": 0
+    },
+    {
+      "name": "poll10us_batch8",
+      "poll_ns": 10000,
+      "batch": 8,
+      "latency_ns_p50_median": 5000,
+      "latency_ns_p99_median": 11000,
+      "max_depth_worst": 17,
+      "headroom_bytes_worst": 69632,
+      "drops": 0,
+      "gaps": 0
+    },
+    {
+      "name": "poll100us_batch64",
+      "poll_ns": 100000,
+      "batch": 64,
+      "latency_ns_p50_median": 50000,
+      "latency_ns_p99_median": 98000,
+      "max_depth_worst": 32,
+      "headroom_bytes_worst": 131072,
+      "drops": 0,
+      "gaps": 0
+    },
+    {
+      "name": "poll1ms_batch256",
+      "poll_ns": 1000000,
+      "batch": 256,
+      "latency_ns_p50_median": 497000,
+      "latency_ns_p99_median": 983000,
+      "max_depth_worst": 213,
+      "headroom_bytes_worst": 872448,
+      "drops": 0,
+      "gaps": 0
+    }
+  ],
+  "pass": true
+}

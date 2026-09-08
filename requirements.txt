@@ -1,0 +1,6 @@
+# Python packages used by the retained macOS emulator measurements.
+# Python itself is recorded per result; the reference rerun uses CPython 3.14.
+cffi==2.1.1
+cryptography==50.0.1
+numpy==2.5.2
+pycparser==3.0
